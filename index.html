@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTA Course Finder - Find Your Perfect Course</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>FUTA Course Finder</h1>
+            <p class="subtitle">Find courses that match your JAMB subjects and aggregate score</p>
+            <div class="university-info">
+                <h2>The Federal University of Technology, Akure</h2>
+                <p class="disclaimer">Note: This information is solely for guidance and does not guarantee admission. It is created to give an assumption on what the cut-off should fall into.</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="calculator-section">
+                <h3>Calculate Your FUTA Aggregate Score</h3>
+                <p class="calculator-info">Use this calculator to determine your actual screening result based on FUTA's method: <strong>UTME (75%) + O'Level (25%)</strong></p>
+                
+                <form id="aggregateCalculatorForm">
+                    <div class="calculator-grid">
+                        <div class="utme-section">
+                            <h4>UTME Score</h4>
+                            <label for="utmeScore">Your UTME Score (out of 400):</label>
+                            <input type="number" id="utmeScore" min="0" max="400" placeholder="e.g., 270" required>
+                        </div>
+
+                        <div class="olevel-section">
+                            <h4>O'Level Results (5 Core Subjects)</h4>
+                            <p class="olevel-note">Note: Any grade below C6 (D7, E8, F9) will disqualify your application</p>
+                            
+                            <div class="olevel-grid">
+                                <div class="subject-grade">
+                                    <label for="english">English:</label>
+                                    <select id="english" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+
+                                <div class="subject-grade">
+                                    <label for="mathematics">Mathematics:</label>
+                                    <select id="mathematics" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+
+                                <div class="subject-grade">
+                                    <label for="subject3Grade">Subject 3:</label>
+                                    <select id="subject3Grade" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+
+                                <div class="subject-grade">
+                                    <label for="subject4Grade">Subject 4:</label>
+                                    <select id="subject4Grade" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+
+                                <div class="subject-grade">
+                                    <label for="subject5Grade">Subject 5:</label>
+                                    <select id="subject5Grade" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="calculate-btn">Calculate Aggregate</button>
+                </form>
+
+                <div id="calculatorResult" class="calculator-result" style="display: none;">
+                    <h4>Your FUTA Aggregate Score</h4>
+                    <div class="result-breakdown">
+                        <div class="breakdown-item">
+                            <span class="label">UTME (75%):</span>
+                            <span id="utmePercentage" class="value"></span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="label">O'Level (25%):</span>
+                            <span id="olevelPercentage" class="value"></span>
+                        </div>
+                        <div class="final-aggregate">
+                            <span class="label">Final Aggregate:</span>
+                            <span id="finalAggregate" class="value"></span>
+                        </div>
+                    </div>
+                    <button id="useCalculatedScore" class="use-score-btn">Use This Score Below</button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Find Matching Courses</h3>
+                <p class="form-subtitle">Enter your JAMB subjects and aggregate score to find suitable courses</p>
+                <form id="courseFinderForm">
+                    <div class="subjects-grid">
+                        <div class="subject-group">
+                            <label for="subject1">Subject 1:</label>
+                            <select id="subject1" required>
+                                <option value="">Select Subject</option>
+                                <option value="English">English</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Biology">Biology</option>
+                                <option value="Agric Science">Agric Science</option>
+                                <option value="Economics">Economics</option>
+                                <option value="Geography">Geography</option>
+                                <option value="Government">Government</option>
+                                <option value="Commerce">Commerce</option>
+                                <option value="Literature">Literature</option>
+                                <option value="Technical Drawing">Technical Drawing</option>
+                            </select>
+                        </div>
+
+                        <div class="subject-group">
+                            <label for="subject2">Subject 2:</label>
+                            <select id="subject2" required>
+                                <option value="">Select Subject</option>
+                                <option value="English">English</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Biology">Biology</option>
+                                <option value="Agric Science">Agric Science</option>
+                                <option value="Economics">Economics</option>
+                                <option value="Geography">Geography</option>
+                                <option value="Government">Government</option>
+                                <option value="Commerce">Commerce</option>
+                                <option value="Literature">Literature</option>
+                                <option value="Technical Drawing">Technical Drawing</option>
+                            </select>
+                        </div>
+
+                        <div class="subject-group">
+                            <label for="subject3">Subject 3:</label>
+                            <select id="subject3" required>
+                                <option value="">Select Subject</option>
+                                <option value="English">English</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Biology">Biology</option>
+                                <option value="Agric Science">Agric Science</option>
+                                <option value="Economics">Economics</option>
+                                <option value="Geography">Geography</option>
+                                <option value="Government">Government</option>
+                                <option value="Commerce">Commerce</option>
+                                <option value="Literature">Literature</option>
+                                <option value="Technical Drawing">Technical Drawing</option>
+                            </select>
+                        </div>
+
+                        <div class="subject-group">
+                            <label for="subject4">Subject 4:</label>
+                            <select id="subject4" required>
+                                <option value="">Select Subject</option>
+                                <option value="English">English</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Biology">Biology</option>
+                                <option value="Agric Science">Agric Science</option>
+                                <option value="Economics">Economics</option>
+                                <option value="Geography">Geography</option>
+                                <option value="Government">Government</option>
+                                <option value="Commerce">Commerce</option>
+                                <option value="Literature">Literature</option>
+                                <option value="Technical Drawing">Technical Drawing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="aggregate-group">
+                        <label for="aggregate">Your Aggregate Score:</label>
+                        <input type="number" id="aggregate" min="0" max="100" step="0.1" required placeholder="Enter your aggregate score (e.g., 65.5)">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Find Matching Courses</button>
+                </form>
+            </div>
+
+            <div id="results" class="results-section" style="display: none;">
+                <h3>Matching Courses</h3>
+                <div id="coursesList" class="courses-list"></div>
+                <div class="contact-section">
+                    <p class="contact-info">Need more guidance? Contact the DC for personalized assistance:</p>
+                    <a href="https://wa.me/2347015110605" target="_blank" class="whatsapp-btn">
+                        <span class="whatsapp-icon">📱</span>
+                        MESSAGE DC
+                    </a>
+                </div>
+            </div>
+
+            <div id="noResults" class="no-results" style="display: none;">
+                <h3>No Matching Courses Found</h3>
+                <p>Unfortunately, no courses match your current subject combination and aggregate score. Please:</p>
+                <ul>
+                    <li>Check your subject combinations</li>
+                    <li>Consider improving your aggregate score</li>
+                    <li>Contact the DC for alternative options</li>
+                </ul>
+                <div class="contact-section">
+                    <a href="https://wa.me/2347015110605" target="_blank" class="whatsapp-btn">
+                        <span class="whatsapp-icon">📱</span>
+                        MESSAGE DC
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FUTA Course Finder. All information is for guidance purposes only.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
