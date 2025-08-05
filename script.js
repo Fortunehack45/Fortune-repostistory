@@ -708,8 +708,129 @@ function validateForm() {
     return true;
 }
 
-// Form submission handler
+// Aggregate Calculator Functions
+function calculateFUTAAggregate(utmeScore, olevelGrades) {
+    // UTME calculation (75%)
+    const utmePercentage = (utmeScore / 400) * 75;
+    
+    // O'Level calculation (25%)
+    const olevelSum = olevelGrades.reduce((sum, grade) => sum + grade, 0);
+    const olevelAverage = olevelSum / 5;
+    const olevelPercentage = (olevelAverage / 100) * 25;
+    
+    // Final aggregate
+    const aggregate = utmePercentage + olevelPercentage;
+    
+    return {
+        utmePercentage: utmePercentage.toFixed(3),
+        olevelPercentage: olevelPercentage.toFixed(3),
+        aggregate: aggregate.toFixed(3)
+    };
+}
+
+function validateCalculatorForm() {
+    const utmeScore = document.getElementById('utmeScore').value;
+    const grades = [
+        document.getElementById('english').value,
+        document.getElementById('mathematics').value,
+        document.getElementById('subject3Grade').value,
+        document.getElementById('subject4Grade').value,
+        document.getElementById('subject5Grade').value
+    ];
+
+    // Check UTME score
+    if (!utmeScore || utmeScore < 0 || utmeScore > 400) {
+        alert('Please enter a valid UTME score between 0 and 400.');
+        return false;
+    }
+
+    // Check if all grades are selected
+    if (grades.some(grade => grade === '')) {
+        alert('Please select grades for all 5 O\'Level subjects.');
+        return false;
+    }
+
+    return true;
+}
+
+function displayCalculatorResult(result) {
+    const resultDiv = document.getElementById('calculatorResult');
+    const utmePercentageSpan = document.getElementById('utmePercentage');
+    const olevelPercentageSpan = document.getElementById('olevelPercentage');
+    const finalAggregateSpan = document.getElementById('finalAggregate');
+
+    utmePercentageSpan.textContent = result.utmePercentage + '%';
+    olevelPercentageSpan.textContent = result.olevelPercentage + '%';
+    finalAggregateSpan.textContent = result.aggregate + '%';
+
+    resultDiv.style.display = 'block';
+    resultDiv.classList.add('fade-in');
+    
+    // Scroll to result
+    resultDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Form submission handlers
 document.addEventListener('DOMContentLoaded', function() {
+    // Calculator form handler
+    const calculatorForm = document.getElementById('aggregateCalculatorForm');
+    
+    calculatorForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!validateCalculatorForm()) {
+            return;
+        }
+
+        // Show loading state
+        const calculateBtn = document.querySelector('.calculate-btn');
+        const originalText = calculateBtn.textContent;
+        calculateBtn.innerHTML = '<span class="loading"></span>Calculating...';
+        calculateBtn.disabled = true;
+
+        // Simulate loading delay for better UX
+        setTimeout(() => {
+            const utmeScore = parseFloat(document.getElementById('utmeScore').value);
+            const olevelGrades = [
+                parseFloat(document.getElementById('english').value),
+                parseFloat(document.getElementById('mathematics').value),
+                parseFloat(document.getElementById('subject3Grade').value),
+                parseFloat(document.getElementById('subject4Grade').value),
+                parseFloat(document.getElementById('subject5Grade').value)
+            ];
+
+            const result = calculateFUTAAggregate(utmeScore, olevelGrades);
+            displayCalculatorResult(result);
+
+            // Reset button
+            calculateBtn.textContent = originalText;
+            calculateBtn.disabled = false;
+        }, 1000);
+    });
+
+    // Use calculated score button handler
+    document.getElementById('useCalculatedScore').addEventListener('click', function() {
+        const finalAggregate = document.getElementById('finalAggregate').textContent;
+        const aggregateValue = parseFloat(finalAggregate.replace('%', ''));
+        
+        // Set the aggregate input in the course finder form
+        document.getElementById('aggregate').value = aggregateValue;
+        
+        // Scroll to course finder form
+        document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
+        
+        // Optional: Add visual feedback
+        const aggregateInput = document.getElementById('aggregate');
+        aggregateInput.style.border = '2px solid #2ecc71';
+        aggregateInput.style.boxShadow = '0 0 0 3px rgba(46, 204, 113, 0.2)';
+        
+        setTimeout(() => {
+            aggregateInput.style.border = '2px solid #e0e6ed';
+            aggregateInput.style.boxShadow = 'none';
+        }, 2000);
+    });
+
+    // Course finder form handler
     const form = document.getElementById('courseFinderForm');
     
     form.addEventListener('submit', function(e) {

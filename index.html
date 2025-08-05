@@ -18,8 +18,117 @@
         </header>
 
         <main>
+            <div class="calculator-section">
+                <h3>Calculate Your FUTA Aggregate Score</h3>
+                <p class="calculator-info">Use this calculator to determine your actual screening result based on FUTA's method: <strong>UTME (75%) + O'Level (25%)</strong></p>
+                
+                <form id="aggregateCalculatorForm">
+                    <div class="calculator-grid">
+                        <div class="utme-section">
+                            <h4>UTME Score</h4>
+                            <label for="utmeScore">Your UTME Score (out of 400):</label>
+                            <input type="number" id="utmeScore" min="0" max="400" placeholder="e.g., 270" required>
+                        </div>
+
+                        <div class="olevel-section">
+                            <h4>O'Level Results (5 Core Subjects)</h4>
+                            <p class="olevel-note">Note: Any grade below C6 (D7, E8, F9) will disqualify your application</p>
+                            
+                            <div class="olevel-grid">
+                                <div class="subject-grade">
+                                    <label for="english">English:</label>
+                                    <select id="english" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+
+                                <div class="subject-grade">
+                                    <label for="mathematics">Mathematics:</label>
+                                    <select id="mathematics" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+
+                                <div class="subject-grade">
+                                    <label for="subject3Grade">Subject 3:</label>
+                                    <select id="subject3Grade" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+
+                                <div class="subject-grade">
+                                    <label for="subject4Grade">Subject 4:</label>
+                                    <select id="subject4Grade" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+
+                                <div class="subject-grade">
+                                    <label for="subject5Grade">Subject 5:</label>
+                                    <select id="subject5Grade" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="80">A1</option>
+                                        <option value="72">B2</option>
+                                        <option value="67">B3</option>
+                                        <option value="62">C4</option>
+                                        <option value="57">C5</option>
+                                        <option value="52">C6</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="calculate-btn">Calculate Aggregate</button>
+                </form>
+
+                <div id="calculatorResult" class="calculator-result" style="display: none;">
+                    <h4>Your FUTA Aggregate Score</h4>
+                    <div class="result-breakdown">
+                        <div class="breakdown-item">
+                            <span class="label">UTME (75%):</span>
+                            <span id="utmePercentage" class="value"></span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="label">O'Level (25%):</span>
+                            <span id="olevelPercentage" class="value"></span>
+                        </div>
+                        <div class="final-aggregate">
+                            <span class="label">Final Aggregate:</span>
+                            <span id="finalAggregate" class="value"></span>
+                        </div>
+                    </div>
+                    <button id="useCalculatedScore" class="use-score-btn">Use This Score Below</button>
+                </div>
+            </div>
+
             <div class="form-section">
-                <h3>Enter Your JAMB Details</h3>
+                <h3>Find Matching Courses</h3>
+                <p class="form-subtitle">Enter your JAMB subjects and aggregate score to find suitable courses</p>
                 <form id="courseFinderForm">
                     <div class="subjects-grid">
                         <div class="subject-group">
